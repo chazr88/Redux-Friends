@@ -1,28 +1,45 @@
-import { LOGIN_START } from '../actions';
+import { LOGIN_START, FETCH_DATA_START, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE } from "../actions";
 
 const initialState = {
-    deletingFriend: false,
-    fetchingFriends: false,
-    friends: [],
-    loggingIn: false,
-    savingFriends: false,
-    updatingFriend: false,
-    error: null
-  }
+  fetchingFriends: false,
+  friends: [],
+  loggingIn: false,
+  error: ""
+};
 
 function reducer(state = initialState, action) {
-    switch (action.type){
+  switch (action.type) {
     case LOGIN_START: {
-        return {
-          ...state,
-          isLoggingIn: true
-        };
-      } 
-      default:
-        return state;
+      return {
+        ...state,
+        loggingIn: true
+      };
     }
+    case FETCH_DATA_START: {
+        console.log("Start" )
+        return {
+            ...state, 
+            error: "",
+            fetchingFriends: true
+        };
+    }
+    case FETCH_DATA_SUCCESS: {
+        return {
+            ...state, 
+            error: "",
+            fetchingFriends: false,
+            friends: action.payload
+        };
+    }
+    case FETCH_DATA_FAILURE: {
+        return {
+            ...state, 
+            error: action.payload
+        }
+    }
+    default:
+      return state;
+  }
 }
 
-  
-  export default reducer;
-  
+export default reducer;

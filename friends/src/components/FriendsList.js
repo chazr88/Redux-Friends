@@ -5,18 +5,23 @@ import { withRouter } from 'react-router-dom';
 import { getFriends } from "../actions";
 
 export class FriendsList extends Component {
+    componentDidMount() {
+        this.props.getFriends();
+      }
     render() {
+        console.log(this.props.friends)
         return (
             <div>
-                <p>SOME TEXT</p>
+                {this.props.friends.map(friend => (
+                    <p>{friend.name}</p>
+                ))}
             </div>
         )
     }
 }
 
-const mapStateToProps = ({ gasPrices, fetchingData }) => ({
-    gasPrices,
-    fetchingData
+const mapStateToProps = state => ({
+    friends: state.friends
   });
   
   export default withRouter(

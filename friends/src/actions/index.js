@@ -15,12 +15,12 @@ export const loginAction = creds => dispatch => {
 export const getFriends = () => dispatch => {
     dispatch({ type: FETCH_DATA_START });
     axios
-      .get("http://localhost:5000/api/data", {
+      .get("http://localhost:5000/api/friends", {
         headers: { Authorization: localStorage.getItem("token") }
       })
       .then(res => {
-        console.log(res);
-        dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data.data });
+        console.log(res.data);
+        dispatch({ type: FETCH_DATA_SUCCESS, payload: res.data});
       })
       .catch(err => {
         console.log(err.response);
